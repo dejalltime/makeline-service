@@ -16,6 +16,9 @@ RUN go build -ldflags "-X main.version=$APP_VERSION" -o main .
 # Run the app on alpine
 FROM alpine:latest AS runner
 
+# get CA certificates for TLS
+RUN apk --no-cache add ca-certificates
+
 ARG APP_VERSION=0.1.0
 
 # Copy the build output from the builder container
